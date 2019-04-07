@@ -48,3 +48,4 @@ windows下使用git
 17. 创建分支
    git checkout -b dev //创建dev分支，并切换到dev分支 -b就是一下两条命令的合集 git branch dev + git checkout dev 
    git branch //查看分支 带*号的表示当前再用分支
+   git checkout master //切换回master分支
