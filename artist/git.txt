@@ -1,0 +1,50 @@
+windows下使用git
+1. 安装git https://git-scm.com/download/win 选择非"thumbdrive edition(绿色版)"版本
+2. 打开git bash
+3. 自报家门 --global表示这台机器上所有的repository都会使用这个配置
+   git config --global user.email '1584066465@qq.com'
+   git config --global user.name 'xyg'
+2. cd e:/
+3. mkdir gitworkspace & cd gitworkspace
+4. git init //初始化git repository
+5. 新增文件
+    git add test.txt [test1.txt [test2.txt]]
+    git commit -m "文件变动描述"
+6. 修改并提交
+    git status //查看改动状态
+    git diff test.txt //查看test.txt有哪些变动，类似beyondcompare
+    git add test.txt
+    git commit -m "文件改动描述"
+    git status
+7. 回退版本
+   git log [--pretty=oneline] //第一列是sha1计算的版本号
+   git reset -hard HEAD^ //一个^表示上一个版本，2个依次类推。多个的话可以使用 HEAD~100 表示回退到100个之前的版本
+8. 恢复版本，一般来说是无法恢复的，除非还能看到回退之前的 git log
+   git reset -hard xxx //这里的xxx就是指 git log得到的第一列 也就是版本号
+   如果不巧，git log记录已经被刷掉，或者窗口被关掉，怎么办？
+   git reflog //后悔药，可以看到过往的操作历史记录，当然也就有commit id了
+9. 撤销修改
+   git checkout -- test.txt // -- 很重要，如果没有，则命令变为“切换到另一个分支”
+10. 退回暂存区修改
+   git reset HEAD test.txt //如果修改已经被 git add到暂存区，又不想提及了，可以用此命令回退
+11. 删除文件
+   git rm test.txt
+12. 恢复被误删的文件
+   git checkout -- test.txt //如果你是在文件管理器中不小心删除了test.txt文件，想要恢复，就用此命令
+13. 连接github
+   ssh-keygen -t rsa -C '1584066465@qq.com' //生成秘钥文件，一路回车，无需输入密码，因为不太重要
+   完毕之后可以在 c:/user/sujrex/.ssh/
+   注册github, Settings->SSH and GPG keys->New SSH Key->输入上述文件夹中的id_rsa.pub中的内容，点击保存
+   公司一个，家里一个，可以重复执行上面的步骤，建立多个只属于自己的通道
+14. 创建在线仓库
+   +->New repository->填写"Repository Name" and "description" and chose "public" and tick "Initialize ..." after "Create Repository"
+15. 添加远程库
+   如果本地已经又git库了，现在要同步到github上,在github上建立和本地库一样的名字，使用
+   git remote add origin git@github.com:sujrex/artist.git
+   git push -u origin master //第一次提交
+   git push origin master //后续提交
+16. 从github克隆
+   git clone git@github.com:sujrex/artist.git
+17. 创建分支
+   
+
