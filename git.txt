@@ -29,6 +29,7 @@ windows下使用git
    git reset HEAD test.txt //如果修改已经被 git add到暂存区，又不想提及了，可以用此命令回退
 11. 删除文件
    git rm test.txt
+   git rm files -fr //删除文件夹以及其下面的文件
 12. 恢复被误删的文件
    git checkout -- test.txt //如果你是在文件管理器中不小心删除了test.txt文件，想要恢复，就用此命令
 13. 连接github
@@ -49,3 +50,64 @@ windows下使用git
    git checkout -b dev //创建dev分支，并切换到dev分支 -b就是一下两条命令的合集 git branch dev + git checkout dev 
    git branch //查看分支 带*号的表示当前再用分支
    git checkout master //切换回master分支
+18. 标签新增
+   git branch master //切换到要打tag的分支上
+   git tag v1.0 //这样就默认打到了最新的commit上
+   git tag v1.0 00fsas //打到固定的那个commit上，后面的commit id可以通过 git log --pretty=oneline --abbrev-commit查看
+   git tag -a v1.0 -m 'release v1.0 about miyou' //给打的tag带上说明
+   git tag //查看所有tag
+   git show v1.0 //查看标签信息
+19. 操作标签
+   git tag -d v1.0 //删除某个标签
+   git push origin v1.0 //将某个标签推送到github上
+   git push origin --tags //一次性将本地的tag全部推送到github上
+   删除远程tag
+   git tag -d v1.0 //先删除本地tag
+   git push origin :refs/tags/v1.0 //删除远程tag
+20. 参与github上开源项目
+   在自己账号上fork将要参与的项目
+   git clone git@github.com:sujrex/think.git
+   修改代码，增加特性
+   git push think master
+   如果想要将自己的修改推送到开源项目上，在github上 new pull request.对方接受你的pull之后，就算合成了
+21. 同步使用码云
+   git remote rm origin //删除已关联的远程库
+   git remote add github git@github.com:sujrex/artist.git
+   git remote add gitee git@gitee.com:sujrex/artist.git
+   git push github master //推送修改到github
+   git push gitee master //推送修改到gitee
+22. 忽略需要提交的文件
+   编辑.gitignore文件,内容如下：
+   #windows
+   Thumbs.db
+   
+   #secret config file
+   config.php
+   编辑完成后，将文件提交到git，那么后面相关的文件就不会被提交，git status时就不会列出 Untracked files ...解救强迫症的你
+   git add -f config.php //可以忽略.gitignore的配置强制提交
+   git check-ignore -v config.php //查看config.php为甚被忽略，找到此规则
+23. 一个有用的别名配置
+    git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+    
+    git lg //就可以调用上面的一长串命令了
+    
+    配置文件是放在 .gitconfig中[C:\Users\sujrex]，也可以直接编辑该文件修改相关配置
+24. 配置diff和merge 使用beyondcompare
+    编辑.gitconfig加入
+    tool = bc4
+    [difftool]
+    prompt = true
+    [difftool "bc4"]
+    cmd = \"D:/Program Files/Beyond Compare 4/BCompare.exe\" "$(cygpath -w $LOCAL)" "$REMOTE"
+    [merge]
+    tool = bc4
+    [mergetool]
+    prompt = true
+    [mergetool "bc4"]
+    #trustExitCode = true
+    cmd = \"D:/Program Files/Beyond Compare 4/BCompare.exe\" "$LOCAL" "$REMOTE" "$BASE" "$MERGED"
+    保存
+    git difftool test.txt //查看test.txt文件变动
+    git mergetool test.txt //合并test.txt文件冲突
+    合并冲突文件时，git会自动创建xx.orig文件，如果不需要刻意通过修改配置禁止该文件自动产生
+    git --global mergetool.keepBackup false
