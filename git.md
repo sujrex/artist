@@ -150,7 +150,7 @@
    [mergetool "bc4"]
    #trustExitCode = true
    cmd = \"D:/Program Files/Beyond Compare 4/BCompare.exe\" "$LOCAL" "$REMOTE" "$BASE" "$MERGED"
-   保存
+   #保存
    git difftool test.txt //查看test.txt文件变动
    git mergetool test.txt //合并test.txt文件冲突
    #合并冲突文件时，git会自动创建xx.orig文件，如果不需要刻意通过修改配置禁止该文件自动产生
@@ -158,10 +158,10 @@
 ```
 25. 重命名
 ```shell
-git mv oldname newname
+   git mv oldname newname
 ```
 26. 中文乱码
 ```shell
-git config --global core.quotepath false
+   git config --global core.quotepath false
 ```
 > 在git bash的界面中右击空白处，弹出菜单，选择选项->文本->本地Locale，设置为zh_CN，而旁边的字符集选框选为UTF-8
