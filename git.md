@@ -111,3 +111,6 @@ windows下使用git
     git mergetool test.txt //合并test.txt文件冲突
     合并冲突文件时，git会自动创建xx.orig文件，如果不需要刻意通过修改配置禁止该文件自动产生
     git --global mergetool.keepBackup false
+25. 重命名
+git mv oldname newname
+26. 中文乱码
