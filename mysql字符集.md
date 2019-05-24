@@ -1,9 +1,4 @@
-1.var_export和var_dump区别
-    var_export 
-    输出合法的php代码；可以传递第二个参数，从而返回结果；资源类型返回null
-    var_dump 
-    输出结构，展示值类型；资源类型输出resource；可以用控制输出函数捕获输出ob_get_contents()
-2.MYSQL字符集
+# MYSQL字符集
     character字符集就是 元字符 对应编码的映射表
     collation字符序，同一字符集间字符比较规则
     字符集可以对应多个字符序，一个字符序对应一个字符集
